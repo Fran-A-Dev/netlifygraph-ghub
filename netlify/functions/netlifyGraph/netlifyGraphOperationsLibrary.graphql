@@ -1,0 +1,29 @@
+query Issues($owner: String = "Fran-A-Dev", $name: String = "netlifygraph-ghub") @netlify(id: """ed63a33f-d792-4f20-886c-6970a96c134a""", doc: """An example query to start with.""") {
+  gitHub {
+    repository(name: $name, owner: $owner) {
+      issues(first: 100, states: OPEN) {
+        edges {
+          node {
+            id
+            body
+            title
+            createdAt
+            url
+            comments(first: 100) {
+              nodes {
+                body
+                createdAt
+                id
+                author {
+                  avatarUrl
+                  login
+                }
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
